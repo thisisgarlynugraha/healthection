@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Ramsey\Uuid\Uuid as RamseyUuid;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    protected $keyType = 'string';
 
     /**
      * The attributes that are mass assignable.
@@ -39,7 +42,18 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
+        'id' => 'string',
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public $incrementing = false;
+
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function($obj) {
+            $obj->id = RamseyUuid::uuid4()->toString();
+        });
+    }
 }
