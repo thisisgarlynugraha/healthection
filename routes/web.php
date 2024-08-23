@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\TensimeterController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -34,9 +35,13 @@ Route::group(['prefix' => 'master', 'middleware' => ['auth:sanctum', 'verified']
     Route::delete('/operator/{id}/destroy', [OperatorController::class, 'destroy'])->name('operator.destroy');
     Route::get('/operator/ajax', [OperatorController::class, 'ajax'])->name('operator.ajax');
 
-    Route::get('/patient', [PatientController::class, 'index'])->name('patient.index');
-    Route::get('/patient/create', [PatientController::class, 'create'])->name('patient.create');
-    Route::post('/patient/store', [PatientController::class, 'store'])->name('patient.store');
-    Route::delete('/patient/{id}/destroy', [PatientController::class, 'destroy'])->name('patient.destroy');
-    Route::get('/patient/ajax', [PatientController::class, 'ajax'])->name('patient.ajax');
+    Route::name('patient.')->prefix('student')->group(function () {
+        Route::get('/', [PatientController::class, 'index'])->name('index');
+        Route::get('/create', [PatientController::class, 'create'])->name('create');
+        Route::post('/store', [PatientController::class, 'store'])->name('store');
+        Route::delete('/{id}/destroy', [PatientController::class, 'destroy'])->name('destroy');
+        Route::get('/ajax', [PatientController::class, 'ajax'])->name('ajax');
+        Route::get('/{id}/tensimeter', [TensimeterController::class, 'index'])->name('tensimeter.index');
+        Route::get('/{id}/tensimeter/ajax', [TensimeterController::class, 'ajax'])->name('tensimeter.ajax');
+    });
 });
