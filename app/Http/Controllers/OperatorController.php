@@ -39,7 +39,7 @@ class OperatorController extends Controller
             return redirect()->route('operator.index');
         } catch (\Exception $Excep) {
             Alert::error('Error', $Excep->getMessage());
-            return redirect()->route('operator.index');
+            return redirect()->back()->withInput();
         }
     }
 
@@ -70,7 +70,7 @@ class OperatorController extends Controller
             return redirect()->route('operator.index');
         } catch (\Exception $Excep) {
             Alert::error('Error', $Excep->getMessage());
-            return redirect()->route('operator.index');
+            return redirect()->back()->withInput();
         }
     }
 
