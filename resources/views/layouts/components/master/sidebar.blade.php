@@ -14,6 +14,7 @@
 
             <li class="menu-header">{{ __('Data Management') }}</li>
             <li class="{{ Request::routeIs('operator.index') ? 'active' : '' }}"><a class="nav-link" href="{{ route('operator.index') }}"><i class="fas fa-fire"></i> <span>{{ __('Operator') }}</span></a></li>
+            <li class="{{ Request::routeIs('patient.index') ? 'active' : '' }}"><a class="nav-link" href="{{ route('patient.index') }}"><i class="fas fa-fire"></i> <span>{{ __('Patient') }}</span></a></li>
         </ul>
     </aside>
 </div>

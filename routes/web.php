@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OperatorController;
+use App\Http\Controllers\PatientController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -32,4 +33,10 @@ Route::group(['prefix' => 'master', 'middleware' => ['auth:sanctum', 'verified']
     Route::put('/operator/update/{id}', [OperatorController::class, 'update'])->name('operator.update');
     Route::delete('/operator/{id}/destroy', [OperatorController::class, 'destroy'])->name('operator.destroy');
     Route::get('/operator/ajax', [OperatorController::class, 'ajax'])->name('operator.ajax');
+
+    Route::get('/patient', [PatientController::class, 'index'])->name('patient.index');
+    Route::get('/patient/create', [PatientController::class, 'create'])->name('patient.create');
+    Route::post('/patient/store', [PatientController::class, 'store'])->name('patient.store');
+    Route::delete('/patient/{id}/destroy', [PatientController::class, 'destroy'])->name('patient.destroy');
+    Route::get('/patient/ajax', [PatientController::class, 'ajax'])->name('patient.ajax');
 });
