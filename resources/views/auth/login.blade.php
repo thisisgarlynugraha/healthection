@@ -9,8 +9,9 @@
         <div class="card-header"><h4>{{ __('Login') }}</h4></div>
 
         <div class="card-body">
-            <form method="POST" action="{{ route('login') }}" class="needs-validation" novalidate="">
+            <form method="POST" action="{{ route('login.post') }}">
                 @csrf
+                @method("POST")
 
                 <div class="form-group">
                     <label for="email">{{ __('Email Address') }}</label>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\PatientController;
@@ -24,7 +25,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::group(['prefix' => 'master', 'middleware' => ['auth:sanctum', 'verified']], function () {
+Route::post('/login/post', [LoginController::class, 'handleLogin'])->name('login.post');
+
+Route::group(['prefix' => 'master', 'middleware' => ['auth:web,web_patient', 'verified']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/operator', [OperatorController::class, 'index'])->name('operator.index');
