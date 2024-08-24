@@ -21,7 +21,7 @@ return new class extends Migration
             $table->double('bpm', 15, 2)->nullable();
             $table->double('systolic', 15, 2)->nullable();
             $table->double('diastolic', 15, 2)->nullable();
-            $table->enum('status', ['Hipotensi', 'Normal', 'Pra-Hipertensi', 'Hipertensi Tingkat 1', 'Hipertensi Tingkat 2', 'Hipertensi Krisis'])->default('Normal');
+            $table->enum('status', ['Hipotensi', 'Normal', 'Pra Hipertensi', 'Hipertensi Tingkat 1', 'Hipertensi Tingkat 2', 'Hipertensi Krisis'])->default('Normal');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone_number', 15);
